@@ -1,3 +1,3 @@
 export async function getAppName() {
-  return "App";
+  return "Smite App";
 }
