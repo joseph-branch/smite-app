@@ -12,10 +12,11 @@
     "@prisma/client": "^3.15.2",
     "cors": "^2.8.5",
     "libjrpc": "^0.2.2",
-    "next": "12.1.6",
+    "next": "^12.2.0",
     "prisma": "^3.15.2",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tinycolor2": "^1.4.2"
   },
   "devDependencies": {
     "@types/node": "18.0.0",

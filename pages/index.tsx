@@ -1,4 +1,7 @@
 import { useEffect, useMemo } from "react";
+
+import { HomeCharacter } from "../src/components/characters/cards/HomeCharacter";
+import { TwoColumnLayout } from "../src/components/layouts/TwoColumnLayout";
 import { useProcedure } from "../src/hooks/useProcedure";
 
 const Home: React.FC = () => {
@@ -6,7 +9,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     execute({});
-  }, []);
+  }, [execute]);
 
   const appname = useMemo(() => {
     if (!result) return "App";
@@ -15,9 +18,19 @@ const Home: React.FC = () => {
   }, [result]);
 
   return (
-    <div className="flex justify-center items-center flex-1 h-screen w-screen">
-      <h1 className="font-semibold">Welcome to {appname}</h1>
-    </div>
+    <>
+      <div className="flex flex-col gap-5 overflow-auto">
+        <div className="flex gap-5 pb-3">
+          {Array.from(Array(20)).map((a, index) => (
+            <HomeCharacter key={index} />
+          ))}
+        </div>
+      </div>
+
+      <div className="flex flex-1 justify-center items-center">
+        <h1 className="font-semibold">Welcome to {appname}</h1>
+      </div>
+    </>
   );
 };
 
