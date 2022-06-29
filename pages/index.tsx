@@ -1,7 +1,6 @@
 import { useEffect, useMemo } from "react";
 
 import { HomeCharacter } from "../src/components/characters/cards/HomeCharacter";
-import { TwoColumnLayout } from "../src/components/layouts/TwoColumnLayout";
 import { useProcedure } from "../src/hooks/useProcedure";
 
 const Home: React.FC = () => {

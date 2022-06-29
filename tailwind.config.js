@@ -5,6 +5,10 @@ module.exports = {
   content: ["./pages/**/*.{js,ts,jsx,tsx}", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      container: {
+        center: true,
+        padding: "2rem",
+      },
       colors: {
         "color-50": tinycolor("#373342").lighten(40).toString(),
         "color-100": tinycolor("#373342").lighten(30).toString(),

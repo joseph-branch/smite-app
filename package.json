@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.5",
+    "@heroicons/react": "^1.0.6",
     "@prisma/client": "^3.15.2",
     "cors": "^2.8.5",
     "libjrpc": "^0.2.2",
@@ -16,6 +18,7 @@
     "prisma": "^3.15.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "regenerator-runtime": "^0.13.9",
     "tinycolor2": "^1.4.2"
   },
   "devDependencies": {

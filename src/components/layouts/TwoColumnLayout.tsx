@@ -10,10 +10,8 @@ export const TwoColumnLayout: React.FC<TwoColumnLayoutProps> = ({
   return (
     <div className="flex flex-col lg:flex-row h-screen overflow-hidden">
       <Sidebar />
-      <div className="p-10">
-        <div className="flex flex-col w-[calc(100vw-21rem)] h-[calc(100vh-80px)]">
-          {children}
-        </div>
+      <div className="h-screen w-screen">
+        <div className="container py-[2rem]">{children}</div>
       </div>
     </div>
   );
