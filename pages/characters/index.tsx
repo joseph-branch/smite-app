@@ -1,7 +1,11 @@
+import { CharacterStats } from "../../src/components/characters/cards/CharacterStats";
+
 export const CharactersPage: React.FC = () => {
   return (
-    <div className="flex justify-center items-center flex-1">
-      <h1 className="font-semibold">Welcome to Characters Page</h1>
+    <div className="flex flex-1 flex-col gap-3">
+      {Array.from(Array(15)).map((a, index) => (
+        <CharacterStats />
+      ))}
     </div>
   );
 };

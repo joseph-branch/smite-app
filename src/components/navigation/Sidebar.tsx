@@ -84,8 +84,20 @@ export const Sidebar: React.FC = () => {
                 <MenuIcon className="h-6 w-6 cursor-pointer lg:hidden block text-color-50" />
               )}
             </Disclosure.Button>
-            <Disclosure.Panel className={"bg-color-500 rounded-b"}>
-              <ul className="flex flex-col flex-1 gap-3">
+            <Disclosure.Panel
+              className={
+                "overflow-y-auto py-4 px-3 bg-color-500 flex flex-col gap-5"
+              }
+            >
+              <div className="space-y-2 flex">
+                <input
+                  type="text"
+                  placeholder="Search Player"
+                  className="flex flex-1 pl-3 py-1.5 rounded-md outline-none text-base bg-color-200 text-color-50"
+                />
+              </div>
+
+              <ul className="flex flex-col flex-1 gap-1">
                 {paths.map((p, index) => (
                   <li className="flex-1 cursor-pointer" key={`${p}-${index}`}>
                     <Link
