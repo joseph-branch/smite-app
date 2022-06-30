@@ -4,22 +4,24 @@ type TierProps = {
   showHeader?: boolean;
   tierTitle: string;
   tierColor?: string;
-  children: React.ReactNode;
+  id: string;
+  children?: React.ReactNode;
 };
 
 export const Tier: React.FC<TierProps> = ({
   showHeader = true,
   tierTitle,
   tierColor = "#ee4c58",
+  id,
   children,
 }) => {
   return (
-    <Droppable droppableId="tier-1" type="character">
+    <Droppable droppableId={id} direction="horizontal">
       {(provided, snapshot) => (
         <div
           ref={provided.innerRef}
           className={`flex flex-1 ${
-            snapshot.isDraggingOver ? "bg-color-100" : "bg-color-300"
+            snapshot.isDraggingOver ? "bg-color-50" : "bg-color-300"
           } rounded-lg`}
           {...provided.droppableProps}
         >
@@ -27,11 +29,11 @@ export const Tier: React.FC<TierProps> = ({
             {showHeader && (
               <div className="flex">
                 <div
-                  className="rounded-l-lg"
+                  className="rounded-l-lg flex justify-center items-center"
                   style={{ backgroundColor: tierColor }}
                 >
-                  <div className=" flex">
-                    <span className="w-20 h-20 flex items-center justify-center font-semibold">
+                  <div className="flex flex-1">
+                    <span className="w-20 h-20 flex flex-1 items-center justify-center font-semibold">
                       {tierTitle}
                     </span>
                   </div>

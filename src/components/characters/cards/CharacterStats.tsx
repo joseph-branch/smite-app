@@ -19,7 +19,7 @@ export const CharacterStats: React.FC = () => {
           </div>
         </div>
         <div className="flex flex-1 items-center">
-          {Array.from(Array(15)).map((a, index) => (
+          {Array.from(Array(20)).map((a, index) => (
             <div className="flex flex-1 flex-col">
               <span>PP</span>
               <span>39</span>

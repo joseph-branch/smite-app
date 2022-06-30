@@ -1,16 +1,22 @@
 import { Draggable } from "react-beautiful-dnd";
 
-export const TierItem: React.FC = () => {
+type TierItemProps = {
+  children: React.ReactNode;
+  id: string;
+  index: number;
+};
+
+export const TierItem: React.FC<TierItemProps> = ({ children, id, index }) => {
   return (
-    <Draggable draggableId="tier-item-1" index={0}>
-      {(provided, snapshot) => (
+    <Draggable draggableId={id} index={index} key={id}>
+      {(provided) => (
         <div
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className="p-2 flex"
+          className="p-2 flex items-center justify-center border-4 border-color-100 rounded-lg"
         >
-          <h4 className="text-center">My draggable</h4>
+          {children}
         </div>
       )}
     </Draggable>

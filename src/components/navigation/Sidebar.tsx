@@ -47,9 +47,12 @@ export const Sidebar: React.FC = () => {
           <div>
             <ul className="flex flex-col flex-1 gap-3">
               {paths.map((p, index) => (
-                <div className="flex flex-1 justify-center items-center">
+                <div
+                  className="flex flex-1 justify-center items-center"
+                  key={`${p}-${index}-web`}
+                >
                   <XIcon className="h-6 w-6 cursor-pointer text-color-50" />
-                  <li className="flex-1 cursor-pointer" key={`${p}-${index}`}>
+                  <li className="flex-1 cursor-pointer">
                     <Link
                       href={`${
                         p.toLowerCase() !== paths[0].toLowerCase()
@@ -89,7 +92,7 @@ export const Sidebar: React.FC = () => {
                 "overflow-y-auto py-4 px-3 bg-color-500 flex flex-col gap-5"
               }
             >
-              <div className="space-y-2 flex">
+              <div className="space-y-2 flex" key={"mobile-input"}>
                 <input
                   type="text"
                   placeholder="Search Player"
@@ -97,9 +100,12 @@ export const Sidebar: React.FC = () => {
                 />
               </div>
 
-              <ul className="flex flex-col flex-1 gap-1">
+              <ul className="flex flex-col flex-1 gap-1" key={"mobile-list"}>
                 {paths.map((p, index) => (
-                  <li className="flex-1 cursor-pointer" key={`${p}-${index}`}>
+                  <li
+                    className="flex-1 cursor-pointer"
+                    key={`${p}-${index}-mobile`}
+                  >
                     <Link
                       href={`${
                         p.toLowerCase() !== paths[0].toLowerCase()
