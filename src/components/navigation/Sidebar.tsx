@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Disclosure } from "@headlessui/react";
 
-import { XIcon, MenuIcon } from "@heroicons/react/solid";
+import { XIcon, MenuIcon, HomeIcon } from "@heroicons/react/solid";
 
 const paths = [
   "Home",
@@ -15,7 +15,7 @@ const paths = [
   "Items",
   "Community",
   "About",
-  "Team Composition",
+  "Team-Composition",
 ];
 
 export const Sidebar: React.FC = () => {
@@ -47,12 +47,8 @@ export const Sidebar: React.FC = () => {
           <div>
             <ul className="flex flex-col flex-1 gap-3">
               {paths.map((p, index) => (
-                <div
-                  className="flex flex-1 justify-center items-center"
-                  key={`${p}-${index}-web`}
-                >
-                  <XIcon className="h-6 w-6 cursor-pointer text-color-50" />
-                  <li className="flex-1 cursor-pointer">
+                <div className="flex " key={`${p}-${index}-web`}>
+                  <li className="flex-1 cursor-pointer flex justify-center items-center">
                     <Link
                       href={`${
                         p.toLowerCase() !== paths[0].toLowerCase()
@@ -67,7 +63,10 @@ export const Sidebar: React.FC = () => {
                             : "hover:bg-color-300"
                         }`}
                       >
-                        <span className="ml-3 py-2">{p}</span>
+                        <div className="ml-3 py-2 flex items-center">
+                          <HomeIcon className="h-6 w-6 cursor-pointer text-color-50" />
+                          <span className="ml-3">{p.replace("-", " ")}</span>
+                        </div>
                       </div>
                     </Link>
                   </li>
@@ -92,40 +91,52 @@ export const Sidebar: React.FC = () => {
                 "overflow-y-auto py-4 px-3 bg-color-500 flex flex-col gap-5"
               }
             >
-              <div className="space-y-2 flex" key={"mobile-input"}>
-                <input
-                  type="text"
-                  placeholder="Search Player"
-                  className="flex flex-1 pl-3 py-1.5 rounded-md outline-none text-base bg-color-200 text-color-50"
-                />
-              </div>
+              {({ close }) => (
+                <>
+                  <div className="space-y-2 flex" key={"mobile-input"}>
+                    <input
+                      type="text"
+                      placeholder="Search Player"
+                      className="flex flex-1 pl-3 py-1.5 rounded-md outline-none text-base bg-color-200 text-color-50"
+                    />
+                  </div>
 
-              <ul className="flex flex-col flex-1 gap-1" key={"mobile-list"}>
-                {paths.map((p, index) => (
-                  <li
-                    className="flex-1 cursor-pointer"
-                    key={`${p}-${index}-mobile`}
+                  <ul
+                    className="flex flex-col flex-1 gap-1"
+                    key={"mobile-list"}
                   >
-                    <Link
-                      href={`${
-                        p.toLowerCase() !== paths[0].toLowerCase()
-                          ? p.toLowerCase()
-                          : "/"
-                      }`}
-                    >
-                      <div
-                        className={`flex flex-1 items-center text-base font-normal text-color-50 rounded-lg ${
-                          isActive(p.toLowerCase())
-                            ? "bg-color-300"
-                            : "hover:bg-color-300"
-                        }`}
+                    {paths.map((p, index) => (
+                      <li
+                        className="flex-1 cursor-pointer"
+                        key={`${p}-${index}-mobile`}
+                        onClick={() => {
+                          close();
+                        }}
                       >
-                        <span className="ml-3 py-2">{p}</span>
-                      </div>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+                        <Link
+                          href={`${
+                            p.toLowerCase() !== paths[0].toLowerCase()
+                              ? p.toLowerCase()
+                              : "/"
+                          }`}
+                        >
+                          <div
+                            className={`flex flex-1 items-center text-base font-normal text-color-50 rounded-lg ${
+                              isActive(p.toLowerCase())
+                                ? "bg-color-300"
+                                : "hover:bg-color-300"
+                            }`}
+                          >
+                            <span className="ml-3 py-2">
+                              {p.replace("-", " ")}
+                            </span>
+                          </div>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
             </Disclosure.Panel>
           </>
         )}

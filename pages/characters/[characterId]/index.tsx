@@ -1,8 +1,11 @@
+import { CharacterDetails } from "../../../src/components/characters/cards/CharacterDetails";
+import { CharacterView } from "../../../src/components/characters/CharacterView";
+
 export const CharacterPage: React.FC = () => {
   return (
-    <div className="flex justify-center items-center flex-1">
-      <h1 className="font-semibold">Welcome to Selected Character Page</h1>
-    </div>
+    <>
+      <CharacterView />
+    </>
   );
 };
 
