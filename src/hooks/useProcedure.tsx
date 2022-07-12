@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useCallback, useEffect, useState } from "react";
 
 export interface UseProcedureResult<TResult> {
@@ -70,7 +71,6 @@ export const useProcedure = <TParams, TResult>(
           setResult(result);
           return { error: null, result };
         }
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
         setResult(null);
         setError(err);

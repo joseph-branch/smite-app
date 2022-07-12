@@ -1,27 +1,15 @@
 import { useEffect, useMemo } from "react";
+
+import { HomeBuild } from "../src/components/sections/builds/HomeBuild";
+import { HomeCharacter } from "../src/components/characters/cards/HomeCharacter";
 import { HomeInfo } from "../src/components/cards/HomeInfo";
 import { HomeSkin } from "../src/components/cards/HomeSkin";
-
-import { HomeCharacter } from "../src/components/characters/cards/HomeCharacter";
-import { HomeBuild } from "../src/components/sections/builds/HomeBuild";
 import { useProcedure } from "../src/hooks/useProcedure";
 
 const Home: React.FC = () => {
-  const { execute, loading, result } = useProcedure<any, string>("getAppName");
-
-  useEffect(() => {
-    execute({});
-  }, [execute]);
-
-  const appname = useMemo(() => {
-    if (!result) return "App";
-
-    return result;
-  }, [result]);
-
   return (
     <>
-      <div className="flex flex-col flex-1 gap-5 overflow-auto">
+      <div className="flex flex-col gap-5 overflow-auto">
         <div className="flex gap-5 pb-3">
           {Array.from(Array(20)).map((a, index) => (
             <HomeCharacter key={index} />
@@ -29,7 +17,7 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-      <div className="flex flex-col flex-1 gap-5 overflow-auto">
+      <div className="flex flex-col gap-5 overflow-auto">
         <div className="flex gap-5 pb-1 justify-between">
           <HomeInfo info="Patch Notes" />
           <HomeInfo info="Videos" />
@@ -55,10 +43,10 @@ const Home: React.FC = () => {
         <HomeBuild sectionTitle="Most Recent Builds" />
       </div>
 
-      <div className="flex flex-col flex-1 gap-5 overflow-auto">
+      <div className="flex flex-col gap-5 overflow-auto">
         <div className="flex gap-5">
           {Array.from(Array(20)).map((a, index) => (
-            <HomeSkin />
+            <HomeSkin key={index} />
           ))}
         </div>
       </div>
