@@ -11,7 +11,13 @@ datasource db {
 }
 
 model User {
-  id    Int @id @default(autoincrement())
-  email String @unique
-  username  String
+  id          Int @id @default(autoincrement())
+  email       String @unique
+  username    String
+}
+
+model SmiteSession {
+  id           Int @id @default(autoincrement())
+  sessionId    String
+  timestamp    Int
 }

@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 
 export const getTimestamp = () => {
-  var now = new Date();
+  const now = new Date();
 
   const date = new Date(
     now.getUTCFullYear(),

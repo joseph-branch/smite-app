@@ -1,15 +1,12 @@
 import { CreateSessionArgs } from "../common/types/session";
+import { buildUrl } from "../common/helpers/buildUrl";
 import fetch from "isomorphic-fetch";
-import { getMethodSignature } from "../common/helpers/getMethodSignature";
-import { getTimestamp } from "../common/helpers/getTilmestamp";
 import { method } from "../common/enums";
 
 export async function createSession(args: CreateSessionArgs) {
-  const timestamp = getTimestamp();
+  const url = buildUrl(method.createSession);
 
-  const signature = getMethodSignature(method.createSession, timestamp);
-
-  const url = `${process.env.BASE_URL}/${method.createSession}json/${process.env.DEV_ID}/${signature}/${timestamp}`;
+  console.log(url);
 
   const response = await fetch(new URL(url).href);
 
