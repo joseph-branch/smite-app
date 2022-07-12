@@ -6,8 +6,6 @@ import { method } from "../common/enums";
 export async function createSession(args: CreateSessionArgs) {
   const url = buildUrl(method.createSession);
 
-  console.log(url);
-
   const response = await fetch(new URL(url).href);
 
   if (response.status === 200) {
@@ -17,5 +15,5 @@ export async function createSession(args: CreateSessionArgs) {
     console.log(response);
   }
 
-  return response;
+  return response.json();
 }

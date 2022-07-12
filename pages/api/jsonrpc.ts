@@ -7,6 +7,7 @@ import { createJRPCServer } from "libjrpc";
 const jrpcServer = createJRPCServer({
   createSession: services.createSession,
   getUsers: services.getUsers,
+  getSessionId: services.getSessionId,
   getAppName: services.getAppName,
 });
 
