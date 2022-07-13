@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 type BuildProps = {
   buildAuthor: string;
   buildDescription: string;
@@ -28,8 +29,11 @@ export const Build: React.FC<BuildProps> = ({
         <div className="flex justify-center items-center">
           {tags && (
             <div className="flex flex-wrap gap-1">
-              {tags.map((t) => (
-                <span className="bg-color-50 text-color-700 text-xs font-semibold mr-2 px-2 py-0.5 rounded">
+              {tags.map((t, index) => (
+                <span
+                  key={index}
+                  className="bg-color-50 text-color-700 text-xs font-semibold mr-2 px-2 py-0.5 rounded"
+                >
                   {t}
                 </span>
               ))}
@@ -40,8 +44,8 @@ export const Build: React.FC<BuildProps> = ({
       <div className="flex justify-center items-center grow p-5">
         {items && (
           <div className="flex justify-between flex-1 flex-wrap">
-            {items.map((i) => (
-              <div className="flex p-2">
+            {items.map((i, index) => (
+              <div className="flex p-2" key={index}>
                 <img
                   src="https://via.placeholder.com/150"
                   alt="Character Image"

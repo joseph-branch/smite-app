@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -34,7 +35,7 @@ export const CharacterStats: React.FC<CharacterStatsProps> = ({
           </div>
           <div className="flex gap-3 text-color-800 overflow-auto pb-3 lg:pb-0 flex-wrap md:justify-start justify-center items-center">
             {Array.from(Array(15)).map((a, index) => (
-              <div className="flex">
+              <div className="flex" key={index}>
                 <div className="flex bg-color-300 flex-1 rounded justify-center items-center py-2 px-4 gap-3 flex-col">
                   <span>PP</span>
                   <span>39</span>

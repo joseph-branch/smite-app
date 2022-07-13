@@ -19,5 +19,5 @@ model User {
 model SmiteSession {
   id           Int @id @default(autoincrement())
   sessionId    String
-  timestamp    Int
+  timestamp    String   @db.VarChar(100)
 }

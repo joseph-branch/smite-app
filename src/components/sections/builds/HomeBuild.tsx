@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 type HomeBuildProps = {
   sectionTitle: string;
 };
@@ -7,7 +8,10 @@ export const HomeBuild: React.FC<HomeBuildProps> = ({ sectionTitle }) => {
     <>
       <div className="flex flex-1 gap-5 overflow-auto pb-3">
         {Array.from(Array(15)).map((a, index) => (
-          <div className="p-2 rounded-lg border border-color-50 gap-3 flex-1 flex">
+          <div
+            className="p-2 rounded-lg border border-color-50 gap-3 flex-1 flex"
+            key={index}
+          >
             <div className="flex flex-col lg:flex-row lg:w-[14rem] flex-1">
               <div className="flex justify-center items-center">
                 <div className="border-4 border-color-100 rounded-full flex justify-center items-center flex-col">

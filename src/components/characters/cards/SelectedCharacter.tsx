@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 export const SelectedCharacter: React.FC = () => {
   return (
     <div className="flex flex-col bg-color-300 p-2 rounded justify-center items-center">

@@ -9,6 +9,8 @@ export async function createSession(args: CreateSessionArgs) {
   const response = await fetch(new URL(url).href);
 
   if (response.status === 200) {
+    console.log("Created Session...");
+
     return response.json();
   } else {
     console.log(url);

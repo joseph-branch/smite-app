@@ -1,34 +1,37 @@
-import { createContext, useMemo, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 
 import { useProcedure } from "../../src/hooks/useProcedure";
 
 export interface SessionContextData {
   sessionId: string | null;
+  setSessionId: (sessionId: string | null) => void;
 }
 
 export const SessionContext = createContext<SessionContextData>({
   sessionId: null,
+  setSessionId: () => {},
 });
 
 export const SessionContextProvider: React.FC<any> = ({ children }) => {
   const [sessionId, setSessionId] = useState<string | null>(null);
 
-  const { execute: getRecentSessionId } = useProcedure<null, string>(
-    "getSessionId"
-  );
+  const { execute: getRecentSessionId, result: session } = useProcedure<
+    null,
+    string
+  >("getSessionId");
+
+  useEffect(() => {
+    getRecentSessionId(null);
+  }, [getRecentSessionId]);
 
   useMemo(async () => {
-    const session = await getRecentSessionId(null);
+    if (!session) return undefined;
 
-    console.log(session);
-
-    if (!session.error && session.result) {
-      setSessionId(session.result);
-    }
-  }, [getRecentSessionId, setSessionId]);
+    setSessionId(session);
+  }, [setSessionId, session]);
 
   return (
-    <SessionContext.Provider value={{ sessionId }}>
+    <SessionContext.Provider value={{ sessionId, setSessionId }}>
       {children}
     </SessionContext.Provider>
   );

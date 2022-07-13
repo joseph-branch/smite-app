@@ -8,7 +8,7 @@ const jrpcServer = createJRPCServer({
   createSession: services.createSession,
   getUsers: services.getUsers,
   getSessionId: services.getSessionId,
-  getAppName: services.getAppName,
+  getPlayerIdByName: services.getPlayerIdByName,
 });
 
 export default async function handler(

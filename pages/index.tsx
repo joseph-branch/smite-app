@@ -1,12 +1,31 @@
-import { useEffect, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 
 import { HomeBuild } from "../src/components/sections/builds/HomeBuild";
 import { HomeCharacter } from "../src/components/characters/cards/HomeCharacter";
 import { HomeInfo } from "../src/components/cards/HomeInfo";
 import { HomeSkin } from "../src/components/cards/HomeSkin";
+import { PlayerArgs } from "../common/types/player";
 import { useProcedure } from "../src/hooks/useProcedure";
+import { useSessionContext } from "../src/hooks/useSessionContext";
 
 const Home: React.FC = () => {
+  const { sessionId } = useSessionContext();
+
+  const { execute: getPlayerIdByName, result: playerId } = useProcedure<
+    PlayerArgs,
+    any
+  >("getPlayerIdByName");
+
+  useEffect(() => {
+    getPlayerIdByName({ sessionId: sessionId!!, name: "ph1rewall" });
+  }, [getPlayerIdByName, sessionId]);
+
+  useMemo(() => {
+    if (!playerId) return;
+
+    console.log(playerId);
+  }, [playerId]);
+
   return (
     <>
       <div className="flex flex-col gap-5 overflow-auto">

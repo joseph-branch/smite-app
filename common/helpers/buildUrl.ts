@@ -1,17 +1,29 @@
 import { getMethodSignature } from "./getMethodSignature";
 import { getTimestamp } from "./getTilmestamp";
 
-export function buildUrl(
-  method: string,
-  sessionId?: string,
-  playerName?: string,
-  characterId?: string,
-  lang?: string,
-  matchId?: string,
-  queue?: string,
-  tier?: string,
-  season?: string
-) {
+export type urlOptions = {
+  sessionId?: string;
+  playerName?: string;
+  characterId?: string;
+  lang?: string;
+  matchId?: string;
+  queue?: string;
+  tier?: string;
+  season?: string;
+};
+
+export function buildUrl(method: string, options: urlOptions = {}) {
+  const {
+    sessionId,
+    playerName,
+    characterId,
+    lang,
+    matchId,
+    queue,
+    tier,
+    season,
+  } = options;
+
   const timestamp = getTimestamp();
 
   const signature = getMethodSignature(method, timestamp);
@@ -22,7 +34,6 @@ export function buildUrl(
 
   url += timestamp;
 
-  sessionId ? (url += `/${sessionId}`) : null;
   playerName ? (url += `/${playerName}`) : null;
   characterId ? (url += `/${characterId}`) : null;
   lang ? (url += `/${lang}`) : null;

@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "reset": "npx prisma migrate reset"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
     "@headlessui/react": "^1.6.5",
@@ -26,7 +30,8 @@
     "react-dom": "^18.2.0",
     "regenerator-runtime": "^0.13.9",
     "tinycolor2": "^1.4.2",
-    "ts-md5": "^1.2.11"
+    "ts-md5": "^1.2.11",
+    "ts-node": "^10.8.2"
   },
   "devDependencies": {
     "@types/node": "18.0.0",
