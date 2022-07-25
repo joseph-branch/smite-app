@@ -21,3 +21,49 @@ model SmiteSession {
   sessionId    String
   timestamp    String   @db.VarChar(100)
 }
+
+model Character {
+  characterId                 Int @id
+  name                        String @db.VarChar(50)
+  description                 String @db.VarChar(250)
+  pantheon                    String @db.VarChar(50)
+  lore                        String @db.LongText
+  role                        String @db.VarChar(25)
+  type                        String @db.VarChar(25)
+  archetype                   String @db.VarChar(25)
+  title                       String @db.VarChar(50)
+  cardUrl                     String @db.VarChar(100)
+  iconUrl                     String @db.VarChar(100)
+  attackSpeed                 Decimal
+  attackSpeedPerLevel         Decimal   
+  hP5PerLevel                 Decimal
+  health                      Decimal
+  healthPerFive               Decimal
+  healthPerLevel              Decimal
+  mP5PerLevel                 Decimal
+  magicProtection             Decimal
+  magicProtectionPerLevel     Decimal
+  magicalPower                Decimal
+  magicalPowerPerLevel        Decimal
+  mana                        Decimal
+  manaPerFive                 Decimal
+  manaPerLevel                Decimal
+  physicalPower               Decimal
+  physicalPowerPerLevel       Decimal
+  physicalProtection          Decimal
+  physicalProtectionPerLevel  Decimal
+  speed                       Decimal
+  onFreeRotation              Boolean 
+  autoBanned                  Boolean
+  latestGod                   Boolean 
+  abilities                   Ability[]
+}
+
+model Ability {
+  characterId Int
+  abilityId   Int @id
+  name        String @db.VarChar(100)
+  description String @db.LongText
+  url         String @db.VarChar(250)
+  character   Character @relation(fields: [characterId], references: [characterId])
+}

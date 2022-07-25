@@ -1,27 +1,44 @@
+import { Character } from "@prisma/client";
+
+type SelectedCharacterProps = {
+  character: Character;
+};
+
 /* eslint-disable @next/next/no-img-element */
-export const SelectedCharacter: React.FC = () => {
+export const SelectedCharacter: React.FC<SelectedCharacterProps> = ({
+  character,
+}) => {
+  if (!character) {
+    return <></>;
+  }
+
   return (
-    <div className="flex flex-col bg-color-300 p-2 rounded justify-center items-center">
-      <div className="flex py-2">
+    <div className="flex flex-col bg-color-500 rounded-md">
+      <div className="flex justify-start items-start">
         <img
-          src="https://via.placeholder.com/150"
+          src={character?.cardUrl}
           alt="Character Image"
-          className="rounded-full h-72 w-72 justify-center flex items-center"
+          className="flex-1 justify-start flex rounded-tl-md"
         />
-      </div>
-      <div className="py-5 border-y border-color-50">
-        <span className="text-color-50">
-          Role/Pantheon/Fight Style/Attack Type
-        </span>
-      </div>
-      <div className="py-5">
-        <span className="text-color-50">Lore</span>
+
+        <div className="flex">
+          <span className="text-color-50 overflow-auto text-[.825rem] flex-wrap p-4">
+            {character.lore}
+          </span>
+        </div>
       </div>
 
-      <div className="flex flex-1 border-color-50 border-t w-72 justify-center items-center py-2">
-        <div>
-          <span className="text-color-100 flex-1 rounded-full flex justify-center items-center border-2 h-6 w-6 border-color-50">
-            S
+      <div className="flex flex-1 flex-col p-2">
+        <div className="justify-between flex flex-1">
+          <span className="text-color-50">{character.role}</span>
+          <span className="text-color-50">{character.pantheon}</span>
+          <span className="text-color-50">{character.type}</span>
+          <span className="text-color-50">{character.archetype}</span>
+        </div>
+
+        <div className="flex flex-1 justify-center items-center py-2">
+          <span className="text-color-100 flex-1 rounded-full flex justify-center items-center h-6 w-6">
+            Insert Tier Here Example S
           </span>
         </div>
       </div>

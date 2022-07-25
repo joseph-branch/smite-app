@@ -9,6 +9,9 @@ const jrpcServer = createJRPCServer({
   getUsers: services.getUsers,
   getSessionId: services.getSessionId,
   getPlayerIdByName: services.getPlayerIdByName,
+  getGods: services.getGods,
+  getCharacters: services.getCharacters,
+  getCharacterById: services.getCharacterById,
 });
 
 export default async function handler(

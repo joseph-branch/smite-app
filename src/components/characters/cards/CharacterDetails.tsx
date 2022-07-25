@@ -1,31 +1,57 @@
+import { Ability, Character } from "@prisma/client";
+
+import { CharacterStatDisplay } from "./CharacterStatDisplay";
+
+type CharacterDetailProps = {
+  character: Character;
+  abilities: Ability[];
+};
+
 /* eslint-disable @next/next/no-img-element */
-export const CharacterDetails: React.FC = () => {
+export const CharacterDetails: React.FC<CharacterDetailProps> = ({
+  character,
+  abilities,
+}) => {
+  if (!character) {
+    return <></>;
+  }
+
   return (
     <div className="flex flex-1 flex-col gap-3">
-      <div className="flex gap-3 text-color-50 overflow-auto pb-3 lg:pb-0 flex-wrap md:justify-start justify-center items-center">
-        {Array.from(Array(12)).map((a, index) => (
-          <div className="flex" key={index}>
-            <div className="flex bg-color-300 flex-1 rounded justify-center items-center py-2 px-4 gap-3">
-              <span className="flex text-sm">PP</span>
-              <span className="flex text-sm">39</span>
-            </div>
-          </div>
-        ))}
+      <div className="flex justify-between text-color-50 bg-color-500">
+        <CharacterStatDisplay stat="HP" value={character.health} />
+        <CharacterStatDisplay stat="MN" value={character.mana} />
+        <CharacterStatDisplay stat="SPD" value={character.speed} />
+        <CharacterStatDisplay stat="MP" value={character.magicalPower} />
+        <CharacterStatDisplay stat="PP" value={character.physicalPower} />
+        <CharacterStatDisplay
+          stat="ATS"
+          value={Number(character.attackSpeed).toFixed(2)}
+        />
+        <CharacterStatDisplay
+          stat="MPT"
+          value={Number(character.magicProtection).toFixed(1)}
+        />
+        <CharacterStatDisplay
+          stat="PPT"
+          value={Number(character.physicalProtection).toFixed(1)}
+        />
       </div>
-      <div className="flex flex-col flex-1 gap-3">
-        {Array.from(Array(5)).map((a, index) => (
-          <div className="flex flex-col flex-1" key={index}>
-            <div className="bg-color-300 rounded flex gap-3 flex-1">
-              <div className="flex border-r border-color-50 px-5 items-center">
-                <img
-                  src="https://via.placeholder.com/150"
-                  alt="Character Image"
-                  className="rounded-full h-6 w-6 justify-center flex items-center"
-                />
-              </div>
-              <div className="flex py-2 flex-col">
-                <span className="flex text-color-50 flex-1 items-center text-sm">{`Ability ${index}`}</span>
-                <span className="flex text-color-50 flex-1 items-center text-xs">{`This is a description of the ability or something along those lines.`}</span>
+
+      <div className="flex flex-col flex-1 justify-between">
+        {abilities?.map((a, index) => (
+          <div className="flex flex-col" key={index}>
+            <div className="bg-color-500 rounded flex flex-1">
+              <img
+                src={a.url}
+                alt={a.name}
+                className="border-r border-color-50 rounded-bl-md rounded-tl-md"
+              />
+              <div className="flex flex-col">
+                <span className="flex text-color-50 text-sm">{a.name}</span>
+                <span className="text-color-50 items-center text-xs">
+                  {a.description}
+                </span>
               </div>
             </div>
           </div>

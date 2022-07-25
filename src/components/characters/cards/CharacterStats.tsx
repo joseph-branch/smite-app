@@ -1,47 +1,59 @@
 /* eslint-disable @next/next/no-img-element */
+import { Character } from "@prisma/client";
+import { CharacterStatDisplay } from "./CharacterStatDisplay";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 type CharacterStatsProps = {
-  characterId: string | number;
+  character: Character;
 };
 
 export const CharacterStats: React.FC<CharacterStatsProps> = ({
-  characterId,
+  character,
 }) => {
-  const router = useRouter();
-
   return (
-    <Link href={`/characters/${characterId}`}>
-      <div className="flex flex-1= p-2 rounded-lg border border-color-50 cursor-pointer">
-        <div className="flex flex-1 flex-col lg:flex-row justify-between">
+    <Link href={`/characters/${character.characterId}`}>
+      <div className="flex flex-1 bg-color-500 rounded-md h-16 cursor-pointer">
+        <div className="flex flex-1">
           <div className="flex justify-center items-center">
-            <div className="border-4 border-color-100 rounded-full flex justify-center items-center flex-col">
-              <img
-                src="https://via.placeholder.com/150"
-                alt="Character Image"
-                className="rounded-full h-16 w-16 justify-center flex items-center"
-              />
-            </div>
+            <img
+              src={character.iconUrl}
+              alt={character.name}
+              className="h-16 justify-center flex items-center rounded-tl-md rounded-bl-md"
+            />
           </div>
-          <div className="flex justify-center items-center">
-            <div className="flex flex-col justify-center items-center p-2">
-              <span className="text-center">{"Character Name"}</span>
-              <span className="text-center">{"Character Description"}</span>
-              <span className="text-center">
-                {"Role/Pantheon/Fight Style/Attack Type"}
+
+          <div className="flex">
+            <div className="flex flex-1 flex-col py-2 px-6 md:py-1">
+              <span className="text-left text-sm text-color-50">
+                {character.title}
               </span>
+              <span className="text-left md:text-sm font-semibold text-white">
+                {character.name}
+              </span>
+              <span className="text-left">{character.description}</span>
             </div>
           </div>
-          <div className="flex gap-3 text-color-800 overflow-auto pb-3 lg:pb-0 flex-wrap md:justify-start justify-center items-center">
-            {Array.from(Array(15)).map((a, index) => (
-              <div className="flex" key={index}>
-                <div className="flex bg-color-300 flex-1 rounded justify-center items-center py-2 px-4 gap-3 flex-col">
-                  <span>PP</span>
-                  <span>39</span>
-                </div>
-              </div>
-            ))}
+        </div>
+
+        <div className="flex text-color-800 items-center">
+          <CharacterStatDisplay stat="HP" value={character.health} />
+          <CharacterStatDisplay stat="MN" value={character.mana} />
+          <CharacterStatDisplay stat="SPD" value={character.speed} />
+          <CharacterStatDisplay stat="MP" value={character.magicalPower} />
+          <CharacterStatDisplay stat="PP" value={character.physicalPower} />
+          <CharacterStatDisplay
+            stat="ATS"
+            value={Number(character.attackSpeed).toFixed(2)}
+          />
+          <div className="xl:flex hidden">
+            <CharacterStatDisplay
+              stat="MPT"
+              value={Number(character.magicProtection).toFixed(1)}
+            />
+            <CharacterStatDisplay
+              stat="PPT"
+              value={Number(character.physicalProtection).toFixed(1)}
+            />
           </div>
         </div>
       </div>

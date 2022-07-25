@@ -5,7 +5,7 @@ export type urlOptions = {
   sessionId?: string;
   playerName?: string;
   characterId?: string;
-  lang?: string;
+  lang?: string | number;
   matchId?: string;
   queue?: string;
   tier?: string;
