@@ -57,6 +57,7 @@ model Character {
   autoBanned                  Boolean
   latestGod                   Boolean 
   abilities                   Ability[]
+  builds                      Build[]
 }
 
 model Ability {
@@ -66,4 +67,30 @@ model Ability {
   description String @db.LongText
   url         String @db.VarChar(250)
   character   Character @relation(fields: [characterId], references: [characterId])
+}
+
+model Item {
+  itemId Int @id
+  itemTier Int
+  name   String @db.VarChar(100)
+}
+
+model Build {
+  buildId     Int @id @default(autoincrement())
+  characterId Int
+  character   Character @relation(fields: [characterId], references: [characterId])
+  relic1      Int?
+  relic2      Int?
+  item1Id     Int?
+  item2Id     Int?
+  item3Id     Int?
+  item4Id     Int?
+  item5Id     Int?
+  item6Id     Int?
+}
+
+model Match {
+  id         Int @id @default(autoincrement())
+  queueId    Int
+  matchId    String
 }

@@ -12,40 +12,37 @@ export const CharacterStats: React.FC<CharacterStatsProps> = ({
 }) => {
   return (
     <Link href={`/characters/${character.characterId}`}>
-      <div className="flex flex-1 bg-color-500 rounded-md h-16 cursor-pointer">
-        <div className="flex flex-1">
-          <div className="flex justify-center items-center">
-            <img
-              src={character.iconUrl}
-              alt={character.name}
-              className="h-16 justify-center flex items-center rounded-tl-md rounded-bl-md"
-            />
-          </div>
+      <div className="flex bg-color-500 rounded-md">
+        <div className="flex md:flex-row md:justify-center md:items-center">
+          <img
+            src={character.iconUrl}
+            alt={character.name}
+            className="justify-center flex items-center rounded-tl-md rounded-bl-md w-16"
+          />
+        </div>
 
-          <div className="flex">
-            <div className="flex flex-1 flex-col py-2 px-6 md:py-1">
-              <span className="text-left text-sm text-color-50">
-                {character.title}
-              </span>
-              <span className="text-left md:text-sm font-semibold text-white">
+        <div className="flex flex-1 md:flex-row flex-col cursor-pointer text-sm md:text-base p-2 gap-3">
+          <div className="flex md:basis-2/5 items-center">
+            <div className="flex flex-col">
+              <span className="text-left text-color-50">{character.title}</span>
+              <span className="text-left font-semibold text-white">
                 {character.name}
               </span>
               <span className="text-left">{character.description}</span>
             </div>
           </div>
-        </div>
 
-        <div className="flex text-color-800 items-center">
-          <CharacterStatDisplay stat="HP" value={character.health} />
-          <CharacterStatDisplay stat="MN" value={character.mana} />
-          <CharacterStatDisplay stat="SPD" value={character.speed} />
-          <CharacterStatDisplay stat="MP" value={character.magicalPower} />
-          <CharacterStatDisplay stat="PP" value={character.physicalPower} />
-          <CharacterStatDisplay
-            stat="ATS"
-            value={Number(character.attackSpeed).toFixed(2)}
-          />
-          <div className="xl:flex hidden">
+          <div className="flex flex-1 text-color-800 items-center text-xs">
+            <CharacterStatDisplay stat="HP" value={character.health} />
+            <CharacterStatDisplay stat="MN" value={character.mana} />
+            <CharacterStatDisplay stat="SPD" value={character.speed} />
+            <CharacterStatDisplay stat="MP" value={character.magicalPower} />
+            <CharacterStatDisplay stat="PP" value={character.physicalPower} />
+            <CharacterStatDisplay
+              stat="ATS"
+              value={Number(character.attackSpeed).toFixed(2)}
+            />
+
             <CharacterStatDisplay
               stat="MPT"
               value={Number(character.magicProtection).toFixed(1)}

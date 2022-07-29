@@ -1,24 +1,24 @@
+import { HomeIcon, MenuIcon, XIcon } from "@heroicons/react/solid";
 import React, { useCallback, useState } from "react";
 
+import { Disclosure } from "@headlessui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Disclosure } from "@headlessui/react";
-
-import { XIcon, MenuIcon, HomeIcon } from "@heroicons/react/solid";
 
 const paths = [
   "Home",
   "Characters",
   "Builds",
-  "Guides",
+  // "Guides",
   "Tierlist",
   "Items",
-  "Community",
-  "About",
+  // "Community",
   "Team-Composition",
+  "About",
 ];
 
 export const Sidebar: React.FC = () => {
+  const [playerSearchText, setPlayerSearchText] = useState<string>();
   const router = useRouter();
 
   const isActive = useCallback(
@@ -32,6 +32,11 @@ export const Sidebar: React.FC = () => {
     [router]
   );
 
+  const onEnter = useCallback(() => {
+    if (playerSearchText?.trim() === "") return;
+    router.push(`/players?p=${playerSearchText}`);
+  }, [router, playerSearchText]);
+
   return (
     <>
       <aside className="h-screen hidden lg:flex" aria-label="Sidebar">
@@ -40,6 +45,9 @@ export const Sidebar: React.FC = () => {
             <input
               type="text"
               placeholder="Search Player"
+              onKeyUp={onEnter}
+              value={playerSearchText}
+              onChange={(e) => setPlayerSearchText(e.target.value)}
               className="flex flex-1 pl-3 py-1.5 rounded-md outline-none text-base bg-color-200 text-color-50"
             />
           </div>

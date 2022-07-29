@@ -12,6 +12,12 @@ const jrpcServer = createJRPCServer({
   getGods: services.getGods,
   getCharacters: services.getCharacters,
   getCharacterById: services.getCharacterById,
+  getItems: services.getItems,
+  getMatchHistory: services.getMatchHistory,
+  getMatchIdsByQueue: services.getMatchIdsByQueue,
+  getMatchPlayerDetails: services.getMatchPlayerDetails,
+  getPlayer: services.getPlayer,
+  getPlayers: services.getPlayers,
 });
 
 export default async function handler(
