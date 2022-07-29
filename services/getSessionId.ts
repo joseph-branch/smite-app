@@ -2,11 +2,8 @@ import { PrismaClient } from "@prisma/client";
 import { add } from "date-fns";
 import { createSession } from ".";
 
-export async function getSessionId(
-  db?: PrismaClient,
-  createNewSession: boolean = false
-) {
-  const prisma = db ?? new PrismaClient();
+export async function getSessionId() {
+  const prisma = new PrismaClient();
 
   const foundSession = await prisma.smiteSession.findMany({
     select: { sessionId: true, timestamp: true },
@@ -22,8 +19,7 @@ export async function getSessionId(
   const timestamp = session?.timestamp;
 
   const isValidSession =
-    (timestamp as unknown as number) > new Date().getTime() &&
-    !createNewSession;
+    (timestamp as unknown as number) > new Date().getTime();
 
   if (sessionId && isValidSession) {
     console.log("Using Existing Session...");
@@ -31,6 +27,8 @@ export async function getSessionId(
     return sessionId;
   } else {
     const createdSession = await createSession({});
+
+    console.log(createdSession);
 
     if (createdSession?.session_id) {
       await prisma.smiteSession.create({

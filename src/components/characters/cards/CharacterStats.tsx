@@ -12,7 +12,7 @@ export const CharacterStats: React.FC<CharacterStatsProps> = ({
 }) => {
   return (
     <Link href={`/characters/${character.characterId}`}>
-      <div className="flex bg-color-500 rounded-md">
+      <div className="flex bg-color-500 rounded-md cursor-pointer">
         <div className="flex md:flex-row md:justify-center md:items-center">
           <img
             src={character.iconUrl}
@@ -32,7 +32,7 @@ export const CharacterStats: React.FC<CharacterStatsProps> = ({
             </div>
           </div>
 
-          <div className="flex flex-1 text-color-800 items-center text-xs">
+          <div className="flex flex-1 text-color-800 items-center text-xs md:text-base">
             <CharacterStatDisplay stat="HP" value={character.health} />
             <CharacterStatDisplay stat="MN" value={character.mana} />
             <CharacterStatDisplay stat="SPD" value={character.speed} />
@@ -43,14 +43,19 @@ export const CharacterStats: React.FC<CharacterStatsProps> = ({
               value={Number(character.attackSpeed).toFixed(2)}
             />
 
-            <CharacterStatDisplay
-              stat="MPT"
-              value={Number(character.magicProtection).toFixed(1)}
-            />
-            <CharacterStatDisplay
-              stat="PPT"
-              value={Number(character.physicalProtection).toFixed(1)}
-            />
+            <div className="hidden md:flex md:flex-1">
+              <CharacterStatDisplay
+                stat="MPT"
+                value={Number(character.magicProtection).toFixed(1)}
+              />
+            </div>
+
+            <div className="hidden md:flex md:flex-1">
+              <CharacterStatDisplay
+                stat="PPT"
+                value={Number(character.physicalProtection).toFixed(1)}
+              />
+            </div>
           </div>
         </div>
       </div>

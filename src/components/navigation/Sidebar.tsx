@@ -1,5 +1,10 @@
 import { HomeIcon, MenuIcon, XIcon } from "@heroicons/react/solid";
-import React, { useCallback, useState } from "react";
+import React, {
+  DetailedHTMLProps,
+  InputHTMLAttributes,
+  useCallback,
+  useState,
+} from "react";
 
 import { Disclosure } from "@headlessui/react";
 import Link from "next/link";
@@ -9,12 +14,12 @@ const paths = [
   "Home",
   "Characters",
   "Builds",
-  // "Guides",
   "Tierlist",
   "Items",
-  // "Community",
   "Team-Composition",
   "About",
+  // "Guides",
+  // "Community",
 ];
 
 export const Sidebar: React.FC = () => {
@@ -32,15 +37,26 @@ export const Sidebar: React.FC = () => {
     [router]
   );
 
-  const onEnter = useCallback(() => {
-    if (playerSearchText?.trim() === "") return;
-    router.push(`/players?p=${playerSearchText}`);
-  }, [router, playerSearchText]);
+  const onEnter = useCallback(
+    (
+      event: DetailedHTMLProps<
+        InputHTMLAttributes<HTMLInputElement>,
+        HTMLInputElement
+      >
+    ) => {
+      if (playerSearchText?.trim() === "" || event.key !== "Enter") return;
+      router.push(`/players?searchTerm=${playerSearchText}`);
+    },
+    [router, playerSearchText]
+  );
 
   return (
     <>
-      <aside className="h-screen hidden lg:flex" aria-label="Sidebar">
-        <div className="w-64 overflow-y-auto py-4 px-3 bg-color-500 flex flex-col gap-5">
+      <aside
+        className="h-screen hidden lg:flex border-r-2 border-color-300"
+        aria-label="Sidebar"
+      >
+        <div className="w-64 overflow-y-auto py-4 px-3 bg-color-600 flex flex-col gap-5">
           <div className="space-y-2 flex">
             <input
               type="text"

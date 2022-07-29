@@ -10,6 +10,7 @@ export type urlOptions = {
   queue?: string;
   tier?: string;
   season?: string;
+  portalId?: string;
 };
 
 export function buildUrl(method: string, options: urlOptions = {}) {
@@ -22,13 +23,14 @@ export function buildUrl(method: string, options: urlOptions = {}) {
     queue,
     tier,
     season,
+    portalId,
   } = options;
 
   const timestamp = getTimestamp();
 
   const signature = getMethodSignature(method, timestamp);
 
-  let url = `${process.env.BASE_URL}/${method}json/${process.env.DEV_ID}/${signature}/`;
+  let url = `${process.env.BASE_URL}/${method}json/${process.env.SECONDARY_DEV_ID}/${signature}/`;
 
   sessionId ? (url += `${sessionId}/`) : null;
 
@@ -41,6 +43,7 @@ export function buildUrl(method: string, options: urlOptions = {}) {
   queue ? (url += `/${queue}`) : null;
   tier ? (url += `/${tier}`) : null;
   season ? (url += `/${season}`) : null;
+  portalId ? (url += `/${portalId}`) : null;
 
   return url;
 }

@@ -4,11 +4,11 @@ import { getTimestamp } from "./getTilmestamp";
 export const getMethodSignature = (method: string, timestamp: number) => {
   const md5 = new Md5();
 
-  if (process.env.DEV_ID && process.env.AUTH_KEY) {
+  if (process.env.SECONDARY_DEV_ID && process.env.SECONDARY_AUTH_KEY) {
     md5
-      .appendStr(process.env.DEV_ID)
+      .appendStr(process.env.SECONDARY_DEV_ID)
       .appendStr(method)
-      .appendStr(process.env.AUTH_KEY)
+      .appendStr(process.env.SECONDARY_AUTH_KEY)
       .appendStr(timestamp.toString());
   }
 

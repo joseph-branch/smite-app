@@ -8,7 +8,7 @@ export const CharacterStatDisplay: React.FC<CharacterStatDisplayProps> = ({
   value,
 }) => {
   return (
-    <div className={`flex flex-1 ${value == "0" ? "hidden" : null}`}>
+    <div className="flex flex-1">
       <div className="flex flex-1 justify-start items-start flex-col gap-1">
         <span className="text-sm text-color-50">{stat}</span>
         <span className="font-semibold text-white">{value as number}</span>

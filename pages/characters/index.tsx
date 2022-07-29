@@ -25,7 +25,7 @@ export const CharactersPage: React.FC = () => {
   }, [characters]);
 
   return (
-    <div className="flex flex-1 flex-col gap-3">
+    <div className="flex flex-1 flex-col gap-3 flex-wrap">
       {characters?.map((c, index) => (
         <CharacterStats character={c} key={index} />
       ))}

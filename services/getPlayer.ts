@@ -3,14 +3,13 @@ import { buildUrl } from "../common/helpers/buildUrl";
 import { method } from "../common/enums";
 
 export async function getPlayer(args: PlayerArgs) {
-  const url = buildUrl(method.getPlayer, {
-    sessionId: args.sessionId,
-    playerName: args.name,
-  });
+  const url = buildUrl(method.getPlayer, args);
 
   const response = await fetch(new URL(url).href);
 
   console.log(url);
 
-  return response.json();
+  const player = await response.json();
+
+  return player[0];
 }

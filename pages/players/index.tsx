@@ -1,55 +1,44 @@
+import { PlayerArgs, PlayerBasicResult } from "../../common/types/player";
 import { useEffect, useMemo } from "react";
 
-import { CharacterArgs } from "../../common/types/character";
-import { MatchHistoryArgs } from "../../common/types/matchHistory";
-import { PlayerArgs } from "../../common/types/player";
+import { PlayerBasicInfo } from "../../src/components/players/cards/PlayerBasicInfo";
 import { useProcedure } from "../../src/hooks/useProcedure";
+import { useRouter } from "next/router";
 import { useSessionContext } from "../../src/hooks/useSessionContext";
 
 export const Players: React.FC = () => {
   const { sessionId } = useSessionContext();
+  const router = useRouter();
 
-  const { execute: getMatchIdsByQueue, result: items } = useProcedure<
-    MatchHistoryArgs,
-    any
-  >("getMatchIdsByQueue");
-
-  const { execute: getPlayer, result: player } = useProcedure<PlayerArgs, any>(
-    "getPlayers"
-  );
-
-  const { execute: getMatchHistory, result: matchHistory } = useProcedure<
-    MatchHistoryArgs,
-    any
-  >("getMatchHistory");
-
-  const { execute: getMatchPlayerDetails, result: details } = useProcedure<
-    MatchHistoryArgs,
-    any
-  >("getMatchPlayerDetails");
+  const {
+    execute: getPlayers,
+    loading,
+    result: players,
+  } = useProcedure<PlayerArgs, PlayerBasicResult[]>("getPlayers");
 
   useEffect(() => {
-    getMatchIdsByQueue({ sessionId: sessionId! });
-    // getPlayer({ sessionId: sessionId!, name: "trelli" });
-    // getMatchHistory({ sessionId: sessionId!, player: "" });
-    // getMatchPlayerDetails({ sessionId: sessionId!, matchId: "" });
-  }, [
-    getMatchIdsByQueue,
-    getPlayer,
-    getMatchHistory,
-    getMatchPlayerDetails,
-    sessionId,
-  ]);
+    const { searchTerm } = router.query;
+    if (router && searchTerm?.toString()?.trim() !== "") {
+      getPlayers({
+        sessionId: sessionId!,
+        playerName: searchTerm?.toString()!,
+      });
+    }
+  }, [getPlayers, router, sessionId]);
 
   useMemo(() => {
-    if (!items) return;
+    if (!players) return;
 
-    console.log(items);
-  }, [items]);
+    console.log(players);
+  }, [players]);
 
   return (
-    <div className="flex flex-1 justify-center items-center flex-col h-screen">
-      <span>Welcome to Players Page</span>
+    <div className="flex flex-1 flex-wrap gap-3 items-center justify-between">
+      {players?.map((p, index) => (
+        <div key={index} className="flex basis-1/2">
+          <PlayerBasicInfo key={p.activePlayerId} player={p} />
+        </div>
+      ))}
     </div>
   );
 };

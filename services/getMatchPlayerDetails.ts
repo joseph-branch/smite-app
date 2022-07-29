@@ -4,14 +4,14 @@ import { getSessionId } from "./getSessionId";
 import { method } from "../common/enums";
 
 export async function getMatchPlayerDetails(args: MatchHistoryArgs) {
-  const url = buildUrl(method.getMatchDetails, {
+  const url = buildUrl(method.getMatchPlayerDetails, {
     sessionId: args.sessionId,
     matchId: args.matchId,
   });
 
-  const response = await fetch(new URL(url).href);
-
   console.log(url);
+
+  const response = await fetch(new URL(url).href);
 
   return response.json();
 }
